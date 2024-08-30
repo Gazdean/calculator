@@ -1,21 +1,7 @@
-import React, { useState } from 'react'
 
-export default function Button({type, id, text, setShown, setNumString}) {
+export default function Button({buttonType, id, text, handleOnClick}) {
 
-    function handleOnclick() {
-        const operators = ['add', 'subtract', 'multiply', 'divide']
-        if(type === 'number') {
-            setNumString(prevNumString => {
-                const newNumString = prevNumString + text.toString();
-                setShown(newNumString); 
-                return newNumString;
-            });
-        }
-        if (type === 'symbol' && operators.includes(id)) {
-            
-        }
-    }
     return (
-        <button id={`_${id}`} className={type} onClick={handleOnclick}>{text}</button>
+        <button id={`_${id}`} className={buttonType} onClick={()=> handleOnClick(buttonType, text)}>{text}</button>
     )
 }
