@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { evaluate, index } from 'mathjs';
+import { useState } from 'react';
+import { evaluate} from 'mathjs';
 import './App.css'
 import Button from './components/Button'
 import NumberButtons from './components/NumberButtons';
@@ -38,6 +38,7 @@ export default function App() {
     else if (input === '0' && buttonType === 'operator') return
       // operator functionality
     else if (buttonType === 'operator') {
+      console.log(input)
       if (!result) {
         if (input.endsWith('.')) {
           setInput(prevInput => {
@@ -80,7 +81,7 @@ export default function App() {
       // percent functionality
     else if (buttonType === 'percent') {
       setInput(prevInput => {
-        return evaluate(prevInput + '%')
+        return evaluate(prevInput + '%').toString()
       })
     }
     else if (buttonType !== 'equals') {
@@ -118,29 +119,3 @@ export default function App() {
     </>
   );
 }
-
-
-
-   
-    //   // operator can not follow an operator
-    //   if ( buttonType === 'operator' && operators.includes(input.slice(-1)) ) {
-    //     return
-    //   }
-    //   // percent can not follow an operator
-    //   if ( buttonType === 'percent' && operators.includes(input.slice(-1)) ) {
-    //     return
-    //   }
-    //   // can not have two percent symbols next to each other
-    //   if ( buttonType === 'percent' && input.slice(-1) === '%' ) {    
-    //     return
-    //   } 
-    
-    
-    // else {
-      // if at start of calculation remove the 0 so it does show on screen
-      // if( input === '0' ) {
-      //   if (buttonType === 'operator') return
-      //   if (buttonType === 'percent') return
-      //     setInput('')
-          // setCalculation('')
-      // }
