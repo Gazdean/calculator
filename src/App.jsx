@@ -11,14 +11,19 @@ export default function App() {
   const [result, setResult] = useState(false)
   const [input, setInput] = useState('0')
   const [resetInput, setResetInput] = useState(false)
+  const [allClear, setAllClear] = useState(true)
 
   function handleOnClick(buttonType, text) {
     const operators = ['+', '-', '*', '/']
-    
-    if ( buttonType === 'allClear' ) {
-        setInput('0')
-        setCalculation('')
-        setResult(false)
+
+    if ( text === 'AC' ) {
+      setInput('0')
+      setCalculation('')
+      setResult(false)
+    }
+    else if ( text === 'C') {
+      setInput('0')
+      setAllClear(true)
     }
     // else if (result && (buttonType !== 'operator' || buttonType !== 'percent')) return
       // limit input length to below 28
@@ -89,6 +94,7 @@ export default function App() {
         setResetInput(false)
       }
       setInput(prevInput => prevInput + text.toString());
+      setAllClear(false)
     }
   }
 
@@ -106,7 +112,7 @@ export default function App() {
           <Button id={'percent'} text={'%'} buttonType={'percent'} handleOnClick={handleOnClick}/>
           <Button id={'decimalPoint'} text={'.'} buttonType={'decimalPoint'} handleOnClick={handleOnClick}/>
           <Button id={'plusMinus'} text={'+/-'} buttonType={'plusMinus'} handleOnClick={handleOnClick}/>
-          <Button id={'allClear'} text={'AC'} buttonType={'allClear'} handleOnClick={handleOnClick}/>
+          <Button id={'allClear'} text={allClear ? 'AC' : 'C'} buttonType={'allClear'} handleOnClick={handleOnClick}/>
         </div>
       </div>    
     </>
@@ -115,11 +121,7 @@ export default function App() {
 
 
 
-    //   // after getting result if next button is a number set calculation to ""
-    //   if ( (calculation === result && (buttonType !== 'operator' &&  buttonType !== 'percent')) ) {
-    //     setInput('')
-    //     setCalculation('')
-    //   }
+   
     //   // operator can not follow an operator
     //   if ( buttonType === 'operator' && operators.includes(input.slice(-1)) ) {
     //     return
